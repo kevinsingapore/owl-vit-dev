@@ -1,14 +1,11 @@
 #!/usr/bin/python3
 
-# from transformers import pipeline
-
-# checkpoint = "google/owlvit-base-patch32"   
-# detector = pipeline(module=checkpoint, task="zero-shot-object-detection")
 
 import urllib3,os
 from PIL import Image
 from io import BytesIO
 from datetime import datetime 
+from transformers import pipeline
 
 url = "https://unsplash.com/photos/oj0zeY2Ltk4/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MTR8fHBpY25pY3xlbnwwfHx8fDE2Nzc0OTE1NDk&force=true&w=640"
 
@@ -34,3 +31,8 @@ if response.status == 200:
     image.close()
 else:
     print(f"无法获取图像，状态码: {response.status}")
+    
+# 加载模型
+checkpoint = "google/owlvit-base-patch32"   
+detector = pipeline(module=checkpoint, task="zero-shot-object-detection")
+print(image)
